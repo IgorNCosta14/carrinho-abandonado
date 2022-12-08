@@ -78,14 +78,15 @@ const objetoTest = {
 }
 
 app.post('/', async (req: Request, res:Response) => {
-    let base64 = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SERVER}`)
-    const response = await axios.post('https://api.reportana.com/2022-05/abandoned-checkouts', objetoTest, {
-        headers: {
-            Authorization: `Basic ${base64}`
-        }
-    });
+    // let base64 = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SERVER}`)
+    // const response = await axios.post('https://api.reportana.com/2022-05/abandoned-checkouts', objetoTest, {
+    //     headers: {
+    //         Authorization: `Basic ${base64}`
+    //     }
+    // });
 
-    res.status(response.status).json(response.data);
+    // res.status(response.status).json(response.data);
+    res.status(201).send("test ok")
 })
 
 app.listen(3000, () => console.log("Server is running!"));
