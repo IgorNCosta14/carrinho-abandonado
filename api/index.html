@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
+</head>
+<body> 
+    <button id="join"> join websocket</button>
+
+    <script>
+        let socket;
+        document.getElementById('join').addEventListener('click', function() {
+            if (!socket) {
+                socket = new io('http://localhost:3000/')
+            }
+        })
+    </script>
+    
+</body>
+</html>
