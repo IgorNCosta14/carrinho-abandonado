@@ -16,7 +16,9 @@ const io = new socketio.Server(httpServer, {
       methods: ["GET", "POST"]
     }
 });
+
 let oneTimeout;
+
 io.on('connection', (socket) => {
     console.log(`New connection: ${socket.id}`);
     
@@ -35,7 +37,8 @@ io.on('connection', (socket) => {
             });
 
             console.log(response.status, response.data)
-            if(response.status = 200) {
+
+            if(response.status <= 400) {
                 socket.emit("infoSent", "enviado");
             } else {
                 socket.emit("infoSent", "erro ao enviar");
@@ -49,6 +52,7 @@ io.on('connection', (socket) => {
             clearTimeout(oneTimeout);
             oneTimeout = setTimeout( sendCartInfo, 5000);
             console.log("Envio adiado")
+            socket.emit("infoSent", "Envio adiado");
         });
 
         socket.on("checkoutComplete", () => {
