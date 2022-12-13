@@ -1,6 +1,5 @@
 name: "Print Current Date action"
 on: push
-name: "Print current time"
 runs:
   using: node16
   main: index.js
