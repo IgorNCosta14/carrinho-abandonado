@@ -1,11 +1,9 @@
 name: "Print Current Date action"
 on: push
-runs:
-  using: node16
-  main: index.js
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: lannonbr/print-current-date@master
+      - run: npm run devT
