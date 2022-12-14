@@ -46,12 +46,12 @@ io.on('connection', (socket) => {
       }
     };
 
-    oneTimeout = setTimeout(sendCartInfo, 5000)
+    oneTimeout = setTimeout(sendCartInfo, 10000)
     console.log('Envio timer iniciado')
 
     socket.on('setTimeOut', () => {
       clearTimeout(oneTimeout)
-      oneTimeout = setTimeout(sendCartInfo, 5000)
+      oneTimeout = setTimeout(sendCartInfo, 10000)
       console.log('Envio adiado')
       socket.emit('infoSent', 'Envio adiado')
     })
