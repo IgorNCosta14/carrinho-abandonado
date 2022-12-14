@@ -24,8 +24,9 @@ io.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`)
 
   socket.on('sendAbandonedCartInfo', (data) => {
+    let dataToSend = data
+
     async function sendCartInfo () {
-      const dataToSend = data
 
       console.log(dataToSend)
 
@@ -36,10 +37,9 @@ io.on('connection', (socket) => {
           'Content-Type': 'application/json'
         }
       })
-
       console.log(response.status, response.data)
 
-      if (response.status <= 400) {
+      if (response.status < 400) {
         socket.emit('infoSent', 'enviado')
       } else {
         socket.emit('infoSent', 'erro ao enviar')
@@ -51,14 +51,23 @@ io.on('connection', (socket) => {
 
     socket.on('setTimeOut', () => {
       clearTimeout(oneTimeout)
+
       oneTimeout = setTimeout(sendCartInfo, 10000)
       console.log('Envio adiado')
+
       socket.emit('infoSent', 'Envio adiado')
     })
 
     socket.on('checkoutComplete', () => {
       clearTimeout(oneTimeout)
       console.log('Compra feita')
+
+    })
+
+    socket.on('updateAbandonedCartInfo', (data) => {
+      dataToSend = data
+      console.log('Dados atualizados')
+
     })
   })
 
