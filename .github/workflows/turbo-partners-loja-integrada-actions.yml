@@ -1,9 +1,0 @@
-name: "Print Current Date action"
-on: push
-jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm install --global yarn
-      - run: yarn
-      - run: yarn devT
