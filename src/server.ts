@@ -24,7 +24,6 @@ io.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`)
 
   socket.on('sendAbandonedCartInfo', (data) => {
-    clearTimeout(oneTimeout);
     let dataToSend = data
 
     async function sendCartInfo () {
@@ -62,6 +61,12 @@ io.on('connection', (socket) => {
     socket.on('checkoutComplete', () => {
       clearTimeout(oneTimeout)
       console.log('Compra feita')
+
+    })
+
+    socket.on('updateAbandonedCartInfo', (data) => {
+      dataToSend = data
+      console.log('Dados atualizados')
 
     })
   })
