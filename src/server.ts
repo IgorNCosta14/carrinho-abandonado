@@ -31,19 +31,18 @@ io.on('connection', (socket) => {
       console.log(dataToSend)
 
       const base64 = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SERVER}`)
-      const response = await axios.post('https://api.reportana.com/2022-05/abandoned-checkouts', dataToSend, {
+      axios.post('https://api.reportana.com/2022-05/abandoned-checkouts', dataToSend, {
         headers: {
           Authorization: `Basic ${base64}`,
           'Content-Type': 'application/json'
         }
       })
-      console.log(response.status, response.data)
-
-      if (response.status < 400) {
+      .then(function (response) {
         socket.emit('infoSent', 'enviado')
-      } else {
-        socket.emit('infoSent', 'erro ao enviar')
-      }
+      })
+      .catch(function (error) {
+        socket.emit('infoSent', error)
+      });
     };
 
     oneTimeout = setTimeout(sendCartInfo, 10000)
