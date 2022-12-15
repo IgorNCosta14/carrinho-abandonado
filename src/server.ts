@@ -24,10 +24,10 @@ io.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`)
 
   socket.on('sendAbandonedCartInfo', (data) => {
-    
+    let dataToSend = data
 
     async function sendCartInfo () {
-      const dataToSend = data
+
       console.log(dataToSend)
 
       const base64 = btoa(`${process.env.CLIENT_ID}:${process.env.CLIENT_SERVER}`)
@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('updateAbandonedCartInfo', (data) => {
-      // dataToSend = data 
+      dataToSend = data
       console.log('Dados atualizados')
 
     })
