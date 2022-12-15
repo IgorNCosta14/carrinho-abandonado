@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`)
 
   socket.on('sendAbandonedCartInfo', (data) => {
-    var dataToSend = data
+    let dataToSend = data
 
     async function sendCartInfo () {
 
