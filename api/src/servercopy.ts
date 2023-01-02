@@ -68,8 +68,6 @@ function convertPurchasePaymentStatus(purchaseStatus) {
   }
 }
 
-//
-
 async function getPurchasesList () {
   await axios.get(`https://api.awsli.com.br/v1/pedido/search/?since_atualizado=2022-12-25T00:00:01&chave_api=${process.env.CHAVE_API}&chave_aplicacao=${process.env.CHAVE_APLICACAO}`,{
       headers: {
@@ -81,7 +79,8 @@ async function getPurchasesList () {
       console.log(purchasesListData);
 
       purchasesListData.objects.forEach(purchase => {
-        console.log(purchase.numero, convertPurchasePaymentStatus(purchase.situacao))
+        console.log(purchase.numero, convertPurchasePaymentStatus(purchase.situacao));
+
       })
       console.log(purchasesListData.objects.length)
     })
@@ -89,8 +88,6 @@ async function getPurchasesList () {
       console.error(error);
     });
 };
-
-console.log("iniciando")
 
 setInterval(getPurchasesList, 60000);
 
@@ -110,131 +107,6 @@ app.post("/finalizacao/:id", async (req: Request, res: Response) => {
     .catch(function (error) {
       console.error(error);
     });
-
-  // purchaseData = {
-  //   cliente: {
-  //     cnpj: null,
-  //     cpf: "14805924713",
-  //     data_nascimento: "1995-01-06",
-  //     email: "igor.costa@turbopartners.com.br",
-  //     id: 53793277,
-  //     nome: "Igor Nascimento Costa",
-  //     razao_social: null,
-  //     resource_uri: "/api/v1/cliente/53793277",
-  //     sexo: "m",
-  //     telefone_celular: "27997737840",
-  //     telefone_principal: null
-  //   },
-  //   cupom_desconto: null,
-  //   data_criacao: "2022-12-27T19:38:28.693934",
-  //   data_expiracao: "2023-01-02T19:38:28.777552",
-  //   data_modificacao: "2022-12-31T09:01:14.230960",
-  //   endereco_entrega: {
-  //     bairro: "Caratoíra",
-  //     cep: "29025655",
-  //     cidade: "Vitória",
-  //     cnpj: null,
-  //     complemento: "",
-  //     cpf: "14805924713",
-  //     endereco: "Rua Clementina Maria Volkers Helmer",
-  //     estado: "ES",
-  //     id: 56868888,
-  //     ie: null,
-  //     nome: "Igor Nascimento Costa",
-  //     numero: "37",
-  //     pais: "Brasil",
-  //     razao_social: null,
-  //     referencia: "",
-  //     rg: null,
-  //     tipo: "PF"
-  //   },
-  //   envios: [
-  //     {
-  //       data_criacao: "2022-12-27T19:38:28.714247",
-  //       data_modificacao: "2022-12-27T19:38:28.714268",
-  //       forma_envio: {
-  //         code: parseFloat("03220"),
-  //         id: 54680,
-  //         nome: "Frenet",
-  //         tipo: "SEDEX*"
-  //       },
-  //       id: 71915209,
-  //       objeto: null,
-  //       prazo: 10,
-  //       valor: "11.62"
-  //     }
-  //   ],
-  //   itens: [
-  //     {
-  //       altura: 7,
-  //       disponibilidade: 0,
-  //       id: 162508793,
-  //       largura: 15,
-  //       linha: 1,
-  //       ncm: "61046200",
-  //       nome: "Short Verão Tranquilidade",
-  //       pedido: "/api/v1/pedido/111460",
-  //       peso: "0.200",
-  //       preco_cheio: "139.9000",
-  //       preco_custo: "0.0000",
-  //       preco_promocional: null,
-  //       preco_subtotal: "139.9000",
-  //       preco_venda: "139.9000",
-  //       produto: "/api/v1/produto/192130367",
-  //       produto_pai: "/api/v1/produto/192130361",
-  //       profundidade: 22,
-  //       quantidade: "1.000",
-  //       sku: "325VIS-tranquilidade-g",
-  //       tipo: "atributo_opcao"
-  //     }
-  //   ],
-  //   numero: 111460,
-  //   pagamentos: [
-  //     {
-  //       authorization_code: null,
-  //       pagamento_banco: null,
-  //       bandeira: null,
-  //       codigo_retorno_gateway: null,
-  //       forma_pagamento: {
-  //         codigo: "paghiper",
-  //         configuracoes: {
-  //           ativo: true,
-  //           disponivel: true
-  //         },
-  //         id: 18,
-  //         imagem: "https://cdn.awsli.com.br/production/static/painel/img/formas-de-pagamento/paghiper-logo.png",
-  //         nome: "Paghiper",
-  //         resource_uri: "/api/v1/pagamento/18"
-  //       },
-  //       id: 71915330,
-  //       identificador_id: null,
-  //       mensagem_gateway: null,
-  //       pagamento_tipo: "bankInvoice",
-  //       parcelamento: {},
-  //       transacao_id: "1219XFN97ZFB6722",
-  //       valor: "147.32",
-  //       valor_pago: "147.32"
-  //     }
-  //   ],
-  //   peso_real: "0.200",
-  //   resource_uri: "/api/v1/pedido/111460",
-  //   situacao: {
-  //     aprovado: false,
-  //     cancelado: true,
-  //     codigo: "pedido_cancelado",
-  //     final: true,
-  //     id: 8,
-  //     nome: "Pedido Cancelado",
-  //     notificar_comprador: true,
-  //     padrao: false,
-  //     resource_uri: "/api/v1/situacao/8"
-  //   },
-  //   utm_campaign: null,
-  //   valor_desconto: "4.20",
-  //   valor_envio: "11.62",
-  //   valor_subtotal: "139.90",
-  //   valor_total: "147.32"
-  // }
 
     if(purchaseData) {
       purchaseDataToSend.reference_id = purchaseData.numero.toString();

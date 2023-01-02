@@ -22,7 +22,22 @@ export class puchasesService {
         this.Puchases.push(purchaseStatus);
     }
 
-    async findPurchase(reference_id: string) {
-    
+    // return value or null
+    async findPurchase(reference_id: string):Promise<PurchaseStatus> {
+        const purchaseStatusExist = this.Puchases.find((purchaseStatus) => purchaseStatus.reference_id === reference_id);
+
+        if(purchaseStatusExist) {
+            return purchaseStatusExist;
+        }
+    }
+
+    async deletePurchase(reference_id: string):Promise<void> {
+        const purchaseStatusExist =this.Puchases.find((purchaseStatus) => purchaseStatus.reference_id === reference_id);
+        
+        const indexOfPurchaseStatusExist = this.Puchases.indexOf(purchaseStatusExist);
+
+        if (purchaseStatusExist) {
+            this.Puchases.splice(indexOfPurchaseStatusExist, 1);
+        };
     }
 }
