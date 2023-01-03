@@ -8,7 +8,11 @@ import cors from 'cors'
 import { IAbandonedCartData, IPurchaseDataToSend, IPurchaseResponse, ILineItems, IAddress } from './interface'
 import dayjs from 'dayjs'
 import { Purchase } from './purchase.entity'
+import "reflect-metadata"
 
+import createConnection from "./infra";
+
+createConnection();
 const app = express()
 app.use(express.json())
 app.use(cors())

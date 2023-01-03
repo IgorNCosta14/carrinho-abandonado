@@ -1,0 +1,9 @@
+{
+    "type": "sqlite",
+    "database": "turbo",
+    "synchronize": true,
+    "logging": true,
+    "entities": ["PurchaseStatus"],
+    "subscribers": [],
+    "migrations": []
+}
